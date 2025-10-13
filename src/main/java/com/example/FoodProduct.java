@@ -35,7 +35,7 @@ public class FoodProduct extends Product implements Perishable, Shippable {
     }
 
     @Override
-    public BigDecimal weight() {
-        return null;
+    public double weight() {
+        return 0.0;
     }
 }

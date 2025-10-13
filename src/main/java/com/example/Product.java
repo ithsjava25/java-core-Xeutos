@@ -32,5 +32,9 @@ public abstract class Product {
         return price;
     }
 
+    public void price(BigDecimal price) {
+        this.price = price;
+    }
+
     public abstract String productDetails();
 }

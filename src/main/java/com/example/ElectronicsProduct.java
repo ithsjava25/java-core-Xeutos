@@ -25,7 +25,7 @@ public class ElectronicsProduct extends Product implements Shippable {
     }
 
     @Override
-    public BigDecimal weight() {
-        return null;
+    public double weight() {
+        return 0.0;
     }
 }
