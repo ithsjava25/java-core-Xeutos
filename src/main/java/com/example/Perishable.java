@@ -6,5 +6,7 @@ public interface Perishable {
 
     LocalDate expirationDate();
 
-    LocalDate isExpired();
+    default boolean isExpired(){
+        return expirationDate().isBefore(LocalDate.now());
+    }
 }

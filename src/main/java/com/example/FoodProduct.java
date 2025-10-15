@@ -20,11 +20,6 @@ public class FoodProduct extends Product implements Perishable, Shippable {
     }
 
     @Override
-    public LocalDate isExpired() {
-        return null;
-    }
-
-    @Override
     public String productDetails() {
         return "";
     }
@@ -36,6 +31,6 @@ public class FoodProduct extends Product implements Perishable, Shippable {
 
     @Override
     public double weight() {
-        return 0.0;
+        return weight.doubleValue();
     }
 }

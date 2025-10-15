@@ -48,7 +48,8 @@ public class Warehouse {
         return false;
     }
 
-    public boolean getProductsGroupedByCategories() {
-        return false;
+    public List<Product> getProductsGroupedByCategories() {
+        return null;
     }
+
 }
