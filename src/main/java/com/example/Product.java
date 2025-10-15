@@ -33,6 +33,8 @@ public abstract class Product {
     }
 
     public void price(BigDecimal price) {
+        if  (price.doubleValue() < 0)
+            throw new IllegalArgumentException("Price cannot be negative");
         this.price = price;
     }
 

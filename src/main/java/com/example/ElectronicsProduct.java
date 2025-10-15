@@ -14,6 +14,9 @@ public class ElectronicsProduct extends Product implements Shippable {
             throw new IllegalArgumentException("Warranty months cannot be negative.");
         }
         this.warrantyMonths = warrantyMonths;
+        if (weight.doubleValue() <0.0) {
+            throw new  IllegalArgumentException("Weight cannot be negative.");
+        }
         this.weight = weight;
     }
 
