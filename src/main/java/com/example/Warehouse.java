@@ -2,6 +2,8 @@ package com.example;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Warehouse {
     private String name;
@@ -81,9 +83,8 @@ public class Warehouse {
         return warehouseInventory.isEmpty();
     }
 
-    //todo figure out how to return products as categories in a map.
     public Map<Category, Product> getProductsGroupedByCategories() {
-        Map<Category, List<Product>> groupedByCategories = new HashMap<>();
-        return null;
+        return warehouseInventory.stream().collect(Collectors.toMap(Product::category, product -> product));
+
     }
 }
