@@ -8,7 +8,7 @@ public class ElectronicsProduct extends Product implements Shippable {
     private BigDecimal weight;
 
     public ElectronicsProduct(UUID id, String name, Category category, BigDecimal price, int warrantyMonths, BigDecimal weight) {
-        super(id, name, category, price);
+        super(name, category, price);
         if  (warrantyMonths < 0) {
             throw new IllegalArgumentException("Warranty months cannot be negative.");
         }

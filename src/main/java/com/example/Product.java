@@ -9,7 +9,7 @@ public abstract class Product {
     private Category category;
     private BigDecimal price;
 
-    public Product(UUID id, String name, Category category, BigDecimal price) {
+    public Product(String name, Category category, BigDecimal price) {
         this.id = UUID.randomUUID();
         this.name = name;
         this.category = category;
