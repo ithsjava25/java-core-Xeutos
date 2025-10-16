@@ -14,9 +14,9 @@ public class Warehouse {
         warehouseInventory = new ArrayList<>();
     }
 
-    public static Warehouse getInstance(String name){
+    public static Warehouse getInstance(String name) {
 
-        name = name.substring(0, 1).toUpperCase() +  name.substring(1);
+        name = name.substring(0, 1).toUpperCase() + name.substring(1);
 
         String finalName = name;
         return instances.computeIfAbsent(name, newName
@@ -25,12 +25,12 @@ public class Warehouse {
         });
     }
 
-    public void addProduct(Product product){
+    public void addProduct(Product product) {
         if (product == null) throw new IllegalArgumentException("Product cannot be null.");
         warehouseInventory.add(product);
     }
 
-    public List<Product> getWarehouseInventory(){
+    public List<Product> getWarehouseInventory() {
         return warehouseInventory;
     }
 
@@ -38,8 +38,8 @@ public class Warehouse {
         return warehouseInventory.stream().filter(product -> product.uuid().equals(id)).findFirst();
     }
 
-    public void updateProductPrice(UUID id, BigDecimal price){
-        if (warehouseInventory.stream().noneMatch(product -> product.uuid().equals(id))){
+    public void updateProductPrice(UUID id, BigDecimal price) {
+        if (warehouseInventory.stream().noneMatch(product -> product.uuid().equals(id))) {
             throw new NoSuchElementException("Product not found with id: ");
         } else {
             warehouseInventory.stream()
@@ -51,15 +51,17 @@ public class Warehouse {
         }
     }
 
-    public List<Perishable> expiredProducts(){
+    public List<Perishable> expiredProducts() {
         List<Perishable> expiredProducts = new ArrayList<>();
-        warehouseInventory.stream().filter(product -> product instanceof Perishable).forEach(product -> {
-            expiredProducts.add((Perishable) product);
-        });
+        warehouseInventory.stream().filter(product -> product instanceof Perishable)
+                .filter(product -> ((Perishable) product).isExpired())
+                .forEach(product -> {
+                    expiredProducts.add((Perishable) product);
+                });
         return expiredProducts;
     }
 
-    public List<Shippable> shippableProducts(){
+    public List<Shippable> shippableProducts() {
         List<Shippable> shippableProducts = new ArrayList<>();
         warehouseInventory.stream().filter(product -> product instanceof Shippable).forEach(product -> {
             shippableProducts.add((Shippable) product);
@@ -67,15 +69,15 @@ public class Warehouse {
         return shippableProducts;
     }
 
-    public void remove(UUID id){
+    public void remove(UUID id) {
         warehouseInventory.removeIf(product -> product.uuid().equals(id));
     }
 
-    public void clearProducts(){
+    public void clearProducts() {
         warehouseInventory.clear();
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return warehouseInventory.isEmpty();
     }
 
@@ -84,6 +86,4 @@ public class Warehouse {
         Map<Category, List<Product>> groupedByCategories = new HashMap<>();
         return null;
     }
-
-    //todo figure out what using interface means.
 }
