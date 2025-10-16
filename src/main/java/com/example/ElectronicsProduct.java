@@ -1,6 +1,5 @@
 package com.example;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.UUID;
 
@@ -27,9 +26,10 @@ public class ElectronicsProduct extends Product implements Shippable {
 
     @Override
     public BigDecimal calculateShippingCost() {
-        if (weight.doubleValue() < 5)
-            return BigDecimal.valueOf(128);
-        return BigDecimal.valueOf(79);
+        BigDecimal shippingPrice = BigDecimal.valueOf(79);
+        if (weight.doubleValue() > 5)
+            shippingPrice = shippingPrice.add(BigDecimal.valueOf(49));
+        return shippingPrice;
     }
 
     @Override

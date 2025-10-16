@@ -60,7 +60,11 @@ public class Warehouse {
     }
 
     public List<Shippable> shippableProducts(){
-        return new ArrayList<>();
+        List<Shippable> shippableProducts = new ArrayList<>();
+        warehouseInventory.stream().filter(product -> product instanceof Shippable).forEach(product -> {
+            shippableProducts.add((Shippable) product);
+        });
+        return shippableProducts;
     }
 
     public void remove(UUID id){
