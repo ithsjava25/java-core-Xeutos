@@ -2,28 +2,21 @@ package com.example;
 
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Warehouse {
-    private String name;
     private static final Map<String, Warehouse> instances = new HashMap<>();
 
     private List<Product> warehouseInventory;
 
     private Warehouse(String name) {
-        this.name = name;
         warehouseInventory = new ArrayList<>();
     }
 
     public static Warehouse getInstance(String name) {
-
-        name = name.substring(0, 1).toUpperCase() + name.substring(1);
-
-        String finalName = name;
         return instances.computeIfAbsent(name, newName
                 -> {
-            return new Warehouse(finalName);
+            return new Warehouse(name);
         });
     }
 
