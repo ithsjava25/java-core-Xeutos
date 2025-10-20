@@ -5,12 +5,25 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Warehouse {
-    private static final Map<String, Warehouse> instances = new HashMap<>();
+    private static Map<String, Warehouse> instances = new HashMap<>();
+    private static Warehouse defaultInstance = null;
 
     private List<Product> warehouseInventory;
 
+    private Warehouse() {
+        String name = "default";
+        warehouseInventory = new ArrayList<>() ;
+    }
+
     private Warehouse(String name) {
         warehouseInventory = new ArrayList<>();
+    }
+
+    public static Warehouse getInstance() {
+        if  (defaultInstance == null) {
+            defaultInstance = new Warehouse();
+        }
+        return defaultInstance;
     }
 
     public static Warehouse getInstance(String name) {
@@ -20,11 +33,20 @@ public class Warehouse {
 
     public void addProduct(Product product) {
         if (product == null) throw new IllegalArgumentException("Product cannot be null.");
+        if (warehouseInventory.stream().anyMatch(product1 -> product.uuid().equals(product1.uuid()))) {
+            throw new IllegalArgumentException("Product with that id already exists, use updateProduct for updates.");
+        }
         warehouseInventory.add(product);
+
+
     }
 
     public List<Product> getWarehouseInventory() {
         return warehouseInventory;
+    }
+
+    public List<Product> getProducts(){
+        return warehouseInventory.stream().toList();
     }
 
     public Optional<Product> getProductById(UUID id) {
@@ -74,8 +96,7 @@ public class Warehouse {
         return warehouseInventory.isEmpty();
     }
 
-    public Map<Category, Product> getProductsGroupedByCategories() {
-        return warehouseInventory.stream().collect(Collectors.toMap(Product::category, product -> product));
-
+    public Map<Category, List<Product>> getProductsGroupedByCategories() {
+        return warehouseInventory.stream().collect(Collectors.groupingBy(Product::category));
     }
 }
