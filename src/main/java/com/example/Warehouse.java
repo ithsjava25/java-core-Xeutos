@@ -45,7 +45,7 @@ public class Warehouse {
     }
 
     public List<Product> getProducts(){
-        return warehouseInventory.stream().toList();
+        return List.copyOf(warehouseInventory);
     }
 
     public Optional<Product> getProductById(UUID id) {
