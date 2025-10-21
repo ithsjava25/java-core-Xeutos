@@ -16,7 +16,7 @@ public class Warehouse {
     }
 
     private Warehouse(String name) {
-        warehouseInventory = new ArrayList<>();
+        this.warehouseInventory = new ArrayList<>();
     }
 
     public static Warehouse getInstance() {
@@ -54,7 +54,7 @@ public class Warehouse {
 
     public void updateProductPrice(UUID id, BigDecimal price) {
         if (warehouseInventory.stream().noneMatch(product -> product.uuid().equals(id))) {
-            throw new NoSuchElementException("Product not found with id: ");
+            throw new NoSuchElementException("Product not found with id: " + id);
         } else {
             warehouseInventory.stream()
                     .filter(product -> product.uuid().equals(id))
