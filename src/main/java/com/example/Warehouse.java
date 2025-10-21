@@ -33,12 +33,11 @@ public class Warehouse {
 
     public void addProduct(Product product) {
         if (product == null) throw new IllegalArgumentException("Product cannot be null.");
-        if (warehouseInventory.stream().anyMatch(product1 -> product.uuid().equals(product1.uuid()))) {
-            throw new IllegalArgumentException("Product with that id already exists, use updateProduct for updates.");
-        }
+        if (warehouseInventory.stream().anyMatch(p -> p.uuid().equals(product.uuid())))
+            throw new IllegalArgumentException("Product already exists.");
         warehouseInventory.add(product);
 
-
+        //warehouseInventory.stream().anyMatch(p -> p.uuid().equals(product.uuid()))
     }
 
     public List<Product> getWarehouseInventory() {

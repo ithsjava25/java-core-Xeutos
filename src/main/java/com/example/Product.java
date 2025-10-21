@@ -16,6 +16,14 @@ public abstract class Product {
         this.price = price;
     }
 
+
+    public Product(UUID id, String name, Category category, BigDecimal price) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.price = price;
+    }
+
     public UUID uuid() {
         return id;
     }
